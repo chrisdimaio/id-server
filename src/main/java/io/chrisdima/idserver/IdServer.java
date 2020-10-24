@@ -2,7 +2,6 @@ package io.chrisdima.idserver;
 
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.HashMap;
 
