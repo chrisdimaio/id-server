@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IdServer extends AbstractVerticle {
-  private static HashMap<String, Integer> test = new HashMap<>();
   ID id;
 
   @Override
