@@ -1,9 +1,10 @@
 package io.chrisdima.idserver;
 
-import java.nio.charset.IllegalCharsetNameException;
 import java.util.Arrays;
 
 public class ID {
+  private static final int ROLLOVER_VALUE = 4096;
+
   private final int workerID;
   private int sequence;
 
@@ -19,7 +20,7 @@ public class ID {
   }
 
   private int getSequence() {
-    if (++this.sequence == 4096) {
+    if (++this.sequence == ROLLOVER_VALUE) {
       this.sequence = 0;
     }
     return this.sequence;
