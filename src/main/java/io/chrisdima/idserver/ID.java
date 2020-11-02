@@ -33,4 +33,12 @@ public class ID {
   private long getTimestamp() {
     return System.currentTimeMillis() & 0x00001FFFFFFFFFFL;
   }
+
+  @Override
+  public String toString() {
+    return "ID{" +
+        "workerID=" + workerID +
+        ", sequence=" + sequence +
+        '}';
+  }
 }

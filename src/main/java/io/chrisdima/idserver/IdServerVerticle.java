@@ -2,9 +2,12 @@ package io.chrisdima.idserver;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
+import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.Json;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
+import io.vertx.core.shareddata.SharedData;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import java.net.NetworkInterface;
@@ -14,23 +17,21 @@ import java.util.Map;
 
 public class IdServerVerticle extends AbstractVerticle {
   private static final int DEFAULT_HTTP_PORT = 8080;
+  private static final String DEFAULT_ROUTE = "/api/id";
 
-  private final Logger logger = LoggerFactory.getLogger( IdServerVerticle.class );
-  ID id;
+  private final ID id = getIDGenerator((int)Thread.currentThread().getId());
 
   @Override
   public void start(Future<Void> future) {
-    this.id = getIDGenerator((int)Thread.currentThread().getId());
+    Logger logger = LoggerFactory.getLogger(IdServerVerticle.class);
 
     Router router = Router.router(vertx);
-    router.get("/api/id").handler(this::getID);
+    router.get(config().getString("route", DEFAULT_ROUTE)).handler(this::getID);
 
     vertx
         .createHttpServer()
         .requestHandler(router::accept)
         .listen(
-            // Retrieve the port from the configuration,
-            // default to 8080.
             config().getInteger("http.port", DEFAULT_HTTP_PORT),
             result -> {
               if (result.succeeded()) {
@@ -45,15 +46,21 @@ public class IdServerVerticle extends AbstractVerticle {
   private void getID(RoutingContext routingContext) {
     routingContext.response()
         .putHeader("content-type", "application/json; charset=utf-8")
-        .end(Json.encodePrettily(Map.of("id", id.generate()))); }
+        .end(Json.encodePrettily(Map.of("id", id.generate())));
+  }
 
   private ID getIDGenerator(int workerID) {
+    Logger logger = LoggerFactory.getLogger(IdServerVerticle.class);
     ID id = null;
+    int machineID = -1;
     try {
-      id = new ID(getMachineId(), workerID);
+      machineID = getMachineId();
+      id = new ID(machineID, workerID);
     } catch (Exception e) {
-      System.out.println(e);
+      logger.error(e);
     }
+    logger.debug(Thread.currentThread().getName() + "> machineID: " + machineID);
+    logger.debug(Thread.currentThread().getName() + ">" + id);
     return id;
   }
 

@@ -22,7 +22,7 @@ public class IDServerLauncher extends Launcher {
           deploymentOptions
               .setInstances(deploymentOptions.getConfig().getInteger("instances")));
     }
-    logger.info("Verticle instances: " + deploymentOptions.getInstances());
+    logger.info("Deployment Options: " + Json.encodePrettily(deploymentOptions.toJson()));
   }
 
 }
