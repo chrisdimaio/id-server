@@ -2,12 +2,9 @@ package io.chrisdima.idserver;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
-import io.vertx.core.Vertx;
-import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.Json;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import io.vertx.core.shareddata.SharedData;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import java.net.NetworkInterface;
@@ -15,7 +12,7 @@ import java.net.SocketException;
 import java.util.Arrays;
 import java.util.Map;
 
-public class IdServerVerticle extends AbstractVerticle {
+public class IDServerVerticle extends AbstractVerticle {
   private static final int DEFAULT_HTTP_PORT = 8080;
   private static final String DEFAULT_ROUTE = "/api/id";
 
@@ -23,7 +20,7 @@ public class IdServerVerticle extends AbstractVerticle {
 
   @Override
   public void start(Future<Void> future) {
-    Logger logger = LoggerFactory.getLogger(IdServerVerticle.class);
+    Logger logger = LoggerFactory.getLogger(IDServerVerticle.class);
     Router router = Router.router(vertx);
     router.get(config().getString("route", DEFAULT_ROUTE)).handler(this::getID);
 
@@ -49,7 +46,7 @@ public class IdServerVerticle extends AbstractVerticle {
   }
 
   private ID getIDGenerator(int workerID) {
-    Logger logger = LoggerFactory.getLogger(IdServerVerticle.class);
+    Logger logger = LoggerFactory.getLogger(IDServerVerticle.class);
     ID id = null;
     int machineID = -1;
     try {

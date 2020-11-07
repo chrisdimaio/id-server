@@ -3,7 +3,7 @@ package io.chrisdima.idserver;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 
-public class IdServer {
+public class IDServer {
   public static void main(String[] args) {
     Vertx vertx = Vertx.vertx();
     DeploymentOptions options = new DeploymentOptions().setInstances(4);
