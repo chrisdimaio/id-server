@@ -15,6 +15,7 @@ public class IDServerLauncher extends Launcher {
 
   @Override
   public void beforeDeployingVerticle(DeploymentOptions deploymentOptions) {
+
     if(deploymentOptions.getConfig().containsKey("instances")) {
       super.beforeDeployingVerticle(
           deploymentOptions

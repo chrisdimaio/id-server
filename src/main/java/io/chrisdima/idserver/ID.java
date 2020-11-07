@@ -8,9 +8,9 @@ public class ID {
   private final int workerID;
   private int sequence;
 
-  public ID(int machineID, int workerID){
-    // Combining the worker id and machine id to make the worker id a little more unique.
-    this.workerID = getWorkerID(Arrays.hashCode(new int[] {machineID, workerID}));
+  public ID(int machineID, int threadID){
+    // Combining the machine id and thread id to make the worker id a little more unique.
+    this.workerID = getWorkerID(Arrays.hashCode(new int[] {machineID, threadID}));
     this.sequence = -1;
   }
 
@@ -38,7 +38,6 @@ public class ID {
   public String toString() {
     return "ID{" +
         "workerID=" + workerID +
-        ", sequence=" + sequence +
         '}';
   }
 }

@@ -16,11 +16,12 @@ public class IDServerVerticle extends AbstractVerticle {
   private static final int DEFAULT_HTTP_PORT = 8080;
   private static final String DEFAULT_ROUTE = "/api/id";
 
-  private final ID id = getIDGenerator((int)Thread.currentThread().getId());
+  private ID id;
 
   @Override
   public void start(Future<Void> future) {
-    Logger logger = LoggerFactory.getLogger(IDServerVerticle.class);
+    id = getIDGenerator((int)Thread.currentThread().getId());
+
     Router router = Router.router(vertx);
     router.get(config().getString("route", DEFAULT_ROUTE)).handler(this::getID);
 
@@ -45,18 +46,18 @@ public class IDServerVerticle extends AbstractVerticle {
         .end(Json.encodePrettily(Map.of("id", id.generate())));
   }
 
-  private ID getIDGenerator(int workerID) {
+  private ID getIDGenerator(int threadID) {
     Logger logger = LoggerFactory.getLogger(IDServerVerticle.class);
     ID id = null;
     int machineID = -1;
     try {
       machineID = getMachineId();
-      id = new ID(machineID, workerID);
+      id = new ID(machineID, threadID);
     } catch (Exception e) {
       logger.error(e);
     }
-    logger.debug(Thread.currentThread().getName() + "> machineID: " + machineID);
-    logger.debug(Thread.currentThread().getName() + ">" + id);
+    logger.info("machineID: " + machineID);
+    logger.info(id);
     return id;
   }
 
