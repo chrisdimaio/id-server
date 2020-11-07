@@ -24,7 +24,6 @@ public class IdServerVerticle extends AbstractVerticle {
   @Override
   public void start(Future<Void> future) {
     Logger logger = LoggerFactory.getLogger(IdServerVerticle.class);
-
     Router router = Router.router(vertx);
     router.get(config().getString("route", DEFAULT_ROUTE)).handler(this::getID);
 
