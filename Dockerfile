@@ -4,4 +4,4 @@ COPY . idserver/
 WORKDIR idserver/
 RUN mvn package
 EXPOSE 8080
-CMD ["java", "-jar", "target/IdServer-1.0-SNAPSHOT-fat.jar", "run", "io.chrisdima.idserver.IDServerVerticle", "-conf", "src/main/resources/configuration/idserver.json"]
+CMD ["java", "-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory", "-jar", "target/IdServer-1.0-SNAPSHOT-fat.jar", "run", "io.chrisdima.idserver.IDServerVerticle", "-conf", "src/main/resources/configuration/idserver.json"]
