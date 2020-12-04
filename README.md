@@ -3,10 +3,21 @@
 # id-server
 My own rendition of Twitter's Snowflake ID server.
 
-*Note: Rename to Pearl? Like a snowflake no two are alike*
+*Note: Rename to Pearl? Like a snowflake, no two are alike.*
 ## Start It
+### Docker
 ```shell script
 docker-compose -f ./docker-compose.yml up -d --build
+```
+
+### Java
+```shell script
+mvn package
+java \
+-jar target/IdServer-1.0-SNAPSHOT-fat.jar \
+run io.chrisdima.idserver.IDServerVerticle \
+-conf src/main/resources/configuration/idserver.json \
+-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory
 ```
 
 ## Use It
@@ -30,8 +41,11 @@ To configure id-server, modify the contents of *src/main/resources/configuration
   "route": "/api/id"
 }
 ```
-#### Parameters
-    http.port: The port the server runs on.
-    instances: The number of worker threads the server will use.
-    route: The path to api.
+#### Fields
+##### http.port
+The port the server runs on.
+##### instances
+The number of worker threads the server will use.
+##### route
+The path to api.
 
