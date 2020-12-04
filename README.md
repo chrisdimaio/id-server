@@ -3,21 +3,34 @@
 # id-server
 My own rendition of Twitter's Snowflake ID server.
 ## How-to run
-### Start the container
+### Start It
 ```shell script
 docker-compose -f ./docker-compose.yml up -d --build
 ```
 
-### Test the server
-run
+### Use It
+Call the api.
 ```shell script
 curl http://localhost:8080/api/id
 ```
-output
+response is json containing a unique id.
 ```json
 {
   "id" : "6740422838775455744"
 }
 ```
 
+### Configure It
+To configure id-server modify the contents of *src/main/resources/configuration/idserver.json*
+```json
+{
+  "http.port": 8080,
+  "instances": 5,
+  "route": "/api/id"
+}
+```
+#### Configurations
+##### http.port: The port the server runs on.
+##### instances: The number of worker threads the server will use.
+##### route: The path to api.
 
