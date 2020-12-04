@@ -2,6 +2,7 @@
 ![GitHub](https://img.shields.io/github/license/chrisdimaio/poker-evaluator)
 # id-server
 My own rendition of Twitter's Snowflake ID server.
+*Note: Rename to Pearl? Like a snowflake no two are alike*
 ## Start It
 ```shell script
 docker-compose -f ./docker-compose.yml up -d --build
