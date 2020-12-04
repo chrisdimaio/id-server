@@ -28,7 +28,7 @@ To configure id-server, modify the contents of *src/main/resources/configuration
   "route": "/api/id"
 }
 ```
-### Configurations
+#### Parameters
     http.port: The port the server runs on.
     instances: The number of worker threads the server will use.
     route: The path to api.
