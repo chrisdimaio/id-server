@@ -30,7 +30,7 @@ To configure id-server, modify the contents of *src/main/resources/configuration
 }
 ```
 #### Configurations
-**http.port**: The port the server runs on.
-**instances**: The number of worker threads the server will use.
-**route** The path to api.
+    http.port: The port the server runs on.
+    instances: The number of worker threads the server will use.
+    route: The path to api.
 
