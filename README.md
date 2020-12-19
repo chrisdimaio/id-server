@@ -1,8 +1,8 @@
 # id-server
 [![Build Status](https://travis-ci.com/chrisdimaio/id-server.svg?branch=master)](https://travis-ci.com/chrisdimaio/id-server)
 ![GitHub](https://img.shields.io/github/license/chrisdimaio/poker-evaluator)
-My own rendition of Twitter's Snowflake ID server.
 
+My own rendition of Twitter's Snowflake ID server.
 *Note: Rename to Pearl? Like a snowflake, no two are alike.*
 ## Start It
 ### Docker
